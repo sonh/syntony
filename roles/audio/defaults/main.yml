@@ -1,0 +1,6 @@
+---
+audio_devices:
+  - id: edifier-s880db-mkii
+    device_name: alsa_card.usb-EDIFIER_EDIFIER_S880DB_MKII-00
+    profile: output:analog-stereo
+    priority: 51

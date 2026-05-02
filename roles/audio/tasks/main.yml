@@ -1,3 +1,4 @@
 ---
 - import_tasks: pipewire.yml
 - import_tasks: wireplumber.yml
+- import_tasks: devices.yml

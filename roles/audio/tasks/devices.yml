@@ -1,0 +1,23 @@
+---
+- name: Pin device profile
+  copy:
+    dest: "{{ ansible_facts['env']['HOME'] }}/.config/wireplumber/wireplumber.conf.d/{{ item.priority }}-{{ item.id }}.conf"
+    mode: '0644'
+    content: |
+      monitor.alsa.rules = [
+          {
+              matches = [
+                  { device.name = "{{ item.device_name }}" }
+              ]
+              actions = {
+                  update-props = {
+                      api.acp.auto-profile = false
+                      device.profile        = "{{ item.profile }}"
+                  }
+              }
+          }
+      ]
+  loop: "{{ audio_devices }}"
+  loop_control:
+    label: "{{ item.id }}"
+  notify: Restart audio services
