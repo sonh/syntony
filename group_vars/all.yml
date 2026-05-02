@@ -1,0 +1,2 @@
+---
+user_home: "{{ ansible_facts['env']['HOME'] }}"

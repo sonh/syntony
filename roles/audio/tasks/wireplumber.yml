@@ -1,12 +1,12 @@
 ---
 - name: Ensure WirePlumber drop-in directory exists
   file:
-    path: "{{ ansible_facts['env']['HOME'] }}/.config/wireplumber/wireplumber.conf.d"
+    path: "{{ user_home }}/.config/wireplumber/wireplumber.conf.d"
     state: directory
     mode: '0755'
 
 - name: Remove legacy per-device drop-ins (replaced by templated filenames)
   file:
-    path: "{{ ansible_facts['env']['HOME'] }}/.config/wireplumber/wireplumber.conf.d/51-edifier-profile.conf"
+    path: "{{ user_home }}/.config/wireplumber/wireplumber.conf.d/51-edifier-profile.conf"
     state: absent
   notify: Restart audio services

@@ -1,7 +1,7 @@
 ---
 - name: Pin device profile
   copy:
-    dest: "{{ ansible_facts['env']['HOME'] }}/.config/wireplumber/wireplumber.conf.d/{{ item.priority }}-{{ item.id }}.conf"
+    dest: "{{ user_home }}/.config/wireplumber/wireplumber.conf.d/{{ item.priority }}-{{ item.id }}.conf"
     mode: '0644'
     content: |
       monitor.alsa.rules = [
