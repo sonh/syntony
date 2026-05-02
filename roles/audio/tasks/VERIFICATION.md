@@ -61,3 +61,23 @@ Expected output:
     device.profile.name = "analog-stereo"
   * node.description = "EDIFIER S880DB MKII Analog Stereo"
 ```
+
+## Confirm it can run 192kHz
+Simulate a sine wave
+```bash
+speaker-test -D default -r 192000 -F S24_LE -c 2 -t sine -f 440
+```
+
+```bash
+cat /proc/asound/card6/pcm0p/sub0/hw_params
+```
+Expected output:
+```bash
+access: MMAP_INTERLEAVED
+format: S32_LE
+subformat: STD
+channels: 2
+rate: 192000 (192000/1)
+period_size: 1024
+buffer_size: 32768
+```
