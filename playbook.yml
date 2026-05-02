@@ -1,0 +1,6 @@
+---
+- name: Syntony System Harmonization
+  hosts: localhost
+  connection: local
+  roles:
+    - audio
