@@ -63,11 +63,12 @@ Expected output:
 ```
 
 ## Confirm it can run 192kHz
-Simulate a sine wave
+Simulate a sine wave (ctrl-c to stop after finish)
 ```bash
 speaker-test -D default -r 192000 -F S24_LE -c 2 -t sine -f 440
 ```
 
+Check the sound output (in another terminal)
 ```bash
 cat /proc/asound/card6/pcm0p/sub0/hw_params
 ```
