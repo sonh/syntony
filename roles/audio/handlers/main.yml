@@ -1,0 +1,9 @@
+---
+- name: Restart audio services
+  systemd:
+    name: "{{ item }}"
+    state: restarted
+    scope: user
+  loop:
+    - pipewire
+    - wireplumber

@@ -1,0 +1,26 @@
+---
+- name: Ensure WirePlumber drop-in directory exists
+  file:
+    path: "{{ ansible_facts['env']['HOME'] }}/.config/wireplumber/wireplumber.conf.d"
+    state: directory
+    mode: '0755'
+
+- name: Pin EDIFIER S880DB MKII to analog-stereo profile (24/192 capable)
+  copy:
+    dest: "{{ ansible_facts['env']['HOME'] }}/.config/wireplumber/wireplumber.conf.d/51-edifier-profile.conf"
+    mode: '0644'
+    content: |
+      monitor.alsa.rules = [
+          {
+              matches = [
+                  { device.name = "alsa_card.usb-EDIFIER_EDIFIER_S880DB_MKII-00" }
+              ]
+              actions = {
+                  update-props = {
+                      api.acp.auto-profile = false
+                      device.profile        = "output:analog-stereo"
+                  }
+              }
+          }
+      ]
+  notify: Restart audio services

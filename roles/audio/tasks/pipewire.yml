@@ -1,0 +1,23 @@
+---
+- name: Ensure PipeWire drop-in directory exists
+  file:
+    path: "{{ ansible_facts['env']['HOME'] }}/.config/pipewire/pipewire.conf.d"
+    state: directory
+    mode: '0755'
+
+- name: Remove stale full pipewire.conf override
+  file:
+    path: "{{ ansible_facts['env']['HOME'] }}/.config/pipewire/pipewire.conf"
+    state: absent
+  notify: Restart audio services
+
+- name: Configure high-res clock rate via PipeWire drop-in
+  copy:
+    dest: "{{ ansible_facts['env']['HOME'] }}/.config/pipewire/pipewire.conf.d/10-high-res.conf"
+    mode: '0644'
+    content: |
+      context.properties = {
+          default.clock.rate = 192000
+          default.clock.allowed-rates = [ 44100 48000 88200 96000 176400 192000 ]
+      }
+  notify: Restart audio services
