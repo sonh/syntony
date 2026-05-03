@@ -3,4 +3,7 @@
   hosts: localhost
   connection: local
   roles:
-    - audio
+    - role: audio
+      tags: [audio]
+    - role: steam
+      tags: [steam]

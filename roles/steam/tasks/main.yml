@@ -1,0 +1,19 @@
+---
+- name: Ensure environment variables directory
+  ansible.builtin.file:
+    path: "{{ user_home }}/.config/environment.d"
+    state: directory
+    mode: "0755"
+
+- name: Setup environment variables
+  ansible.builtin.copy:
+    dest: "{{ user_home }}/.config/environment.d/gaming.conf"
+    mode: "0644"
+    content: |
+      # Steam environment variables
+      PROTON_ENABLE_WAYLAND=1
+      MESA_SHADER_CACHE_MAX_SIZE=24G
+      PROTON_WAYLAND_MONITOR=DP-2
+      PROTON_FSR4_UPGRADE=1
+      PROTON_USE_NTSYNC=1
+      ENABLE_LAYER_MESA_ANTI_LAG=1
